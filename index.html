@@ -2342,7 +2342,7 @@
         plan: document.getElementById('reg-plan-select').value,
         note: document.getElementById('reg-note').value,
         source: 'web_form',
-        date: new Date().toISOString()
+        date: new Date().toLocaleString("vi-VN")
       };
 
       btn.textContent = 'Đang gửi...';
