@@ -934,9 +934,9 @@
     btn.textContent = 'Đang gửi...';
     btn.disabled = true;
 
-    fetch('https://hook.eu1.make.com/zx539j2eciaokhdn8lmqy2qqk7b2f2mi', {
+    fetch('https://script.google.com/macros/s/AKfycbwUW2IZ1XuovCVMCgRdEdo8nDPq4q0Bwn0vMXCnPL0FANN-PJYRyciiBVG1UzowIDtGrw/exec', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      // Dùng mặc định text/plain để vượt màng chắn CORS của hệ thống máy chủ Google
       body: JSON.stringify(payload)
     }).then(function(res) {
       form.style.display = 'none';
