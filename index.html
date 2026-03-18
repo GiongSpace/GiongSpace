@@ -936,7 +936,7 @@
 
     fetch('https://script.google.com/macros/s/AKfycbwUW2IZ1XuovCVMCgRdEdo8nDPq4q0Bwn0vMXCnPL0FANN-PJYRyciiBVG1UzowIDtGrw/exec', {
       method: 'POST',
-      // Dùng mặc định text/plain để vượt màng chắn CORS của hệ thống máy chủ Google
+      mode: 'no-cors', // [Quan trọng] Bắt buộc phải có để báo cho Trình duyệt không chặn luồng gửi (CORS) trên tên miền thật Production
       body: JSON.stringify(payload)
     }).then(function(res) {
       form.style.display = 'none';
