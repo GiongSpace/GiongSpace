@@ -918,14 +918,42 @@
     e.preventDefault();
     var form = document.getElementById('reg-form');
     var body = document.getElementById('reg-modal-body');
-    form.style.display = 'none';
-    var div = document.createElement('div');
-    div.id = 'reg-success';
-    div.className = 'reg-success';
-    div.innerHTML = '<div class="reg-check">✓</div>' +
-      '<h3>Đăng ký thành công!</h3>' +
-      '<p>Cảm ơn bạn đã quan tâm đến Giong Space.<br>Đội ngũ của chúng tôi sẽ liên hệ bạn trong vòng 24 giờ làm việc.</p>';
-    body.appendChild(div);
+    var btn = form.querySelector('.reg-submit');
+    
+    var payload = {
+      name: document.getElementById('reg-name').value,
+      phone: document.getElementById('reg-phone').value,
+      email: document.getElementById('reg-email').value,
+      company: document.getElementById('reg-company').value,
+      plan: document.getElementById('reg-plan-select').value,
+      note: document.getElementById('reg-note').value,
+      source: 'web_form',
+      date: new Date().toISOString()
+    };
+
+    btn.textContent = 'Đang gửi...';
+    btn.disabled = true;
+
+    fetch('https://hook.eu1.make.com/zx539j2eciaokhdn8lmqy2qqk7b2f2mi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res) {
+      form.style.display = 'none';
+      var div = document.createElement('div');
+      div.id = 'reg-success';
+      div.className = 'reg-success';
+      div.innerHTML = '<div class="reg-check" style="font-size:32px;color:var(--rose);margin-bottom:12px;">✓</div>' +
+        '<h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Đăng ký thành công!</h3>' +
+        '<p style="font-size:14px;color:var(--muted);line-height:1.6;">Cảm ơn bạn đã quan tâm đến Giong Space.<br>Chúng tôi đã tiếp nhận thông tin và sẽ liên hệ bạn ngay.</p>';
+      body.appendChild(div);
+    }).catch(function(err) {
+      console.error(err);
+      alert('Có lỗi xảy ra khi gửi. Vui lòng thử lại.');
+    }).finally(function() {
+      btn.textContent = 'Đăng ký ngay →';
+      btn.disabled = false;
+    });
   }
 
   /* ── DOM READY ── */
